@@ -18,7 +18,7 @@
     'Sampler.GitHubTasks'        = 'latest'
     Datum                        = 'latest'
     'Datum.ProtectedData'        = 'latest'
-    DscBuildHelpers              = 'latest'
+    DscBuildHelpers              = '0.3.0-preview0003'
     'DscResource.Test'           = 'latest'
     MarkdownLinkCheck            = 'latest'
     'DscResource.AnalyzerRules'  = 'latest'
@@ -27,7 +27,7 @@
     xDscResourceDesigner         = 'latest'
 
     #DSC Resources
-    xPSDesiredStateConfiguration = '9.1.0'
+    xPSDesiredStateConfiguration = 'latest'
     AADConnectDsc                = 'latest'
 
 }
