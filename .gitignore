@@ -1,12 +1,1 @@
-!output/
-
-output/*
-!output/RequiredModules
-
-output/RequiredModules/*
-
-!output/RequiredModules/DscBuildHelpers
-output/RequiredModules/DscBuildHelpers/*
-!output/RequiredModules/DscBuildHelpers/9.9.9
-
-lab/testResults.xml
+output/
