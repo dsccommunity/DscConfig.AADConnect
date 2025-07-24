@@ -1,5 +1,6 @@
 configuration AADConnectDirectoryExtensionAttributes {
-    param (
+    param
+    (
         [Parameter(Mandatory = $true)]
         [hashtable[]]
         $Items

@@ -1,5 +1,6 @@
 configuration AADSyncRules {
-    param (
+    param
+    (
         [Parameter(Mandatory = $true)]
         [hashtable[]]
         $Items
