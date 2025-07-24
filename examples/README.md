@@ -16,6 +16,9 @@ Complete real-world scenario with multiple environments, complex sync rules, and
 ### [4-DataDrivenConfiguration.ps1](4-DataDrivenConfiguration.ps1)
 Example showing how to use external YAML/JSON data sources with the composite resources.
 
+### [5-DscWorkshopDatumIntegration.ps1](5-DscWorkshopDatumIntegration.ps1)
+Complete example demonstrating integration with DscWorkshop and Datum frameworks, including hierarchical configuration data, merge strategies, and enterprise patterns.
+
 ## Usage
 
 Each example includes:
