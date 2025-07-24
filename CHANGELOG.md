@@ -5,11 +5,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.1] - 2024-07-30
-
 ### Added
 
 - Added documentation and examples.
+
+### Changed
+
+- Removed files of `DscBuildHelpers` and cleaned up `.gitignore`.
+- Updated `RequiredModules.psd1`.
+
+## [0.1.1] - 2024-07-30
 
 ### Fixed
 
