@@ -4,7 +4,7 @@
         Target     = 'output\RequiredModules'
         Parameters = @{
             Repository      = 'PSGallery'
-            AllowPreRelease = $false
+            AllowPreRelease = $true
         }
     }
 
