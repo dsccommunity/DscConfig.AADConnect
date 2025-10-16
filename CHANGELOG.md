@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated `RequiredModules.psd1`.
 - Updated documentation.
 
+### Fixed
+
+- Formatting throughout the project.
+
 ## [0.1.1] - 2024-07-30
 
 ### Fixed

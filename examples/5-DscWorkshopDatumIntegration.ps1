@@ -16,8 +16,8 @@ This example covers:
 - Advanced merge strategies for complex configurations
 #>
 
-Write-Host "=== DscWorkshop/Datum Integration Example ===" -ForegroundColor Cyan
-Write-Host "This example shows the YAML configuration structure used in enterprise deployments" -ForegroundColor Green
+Write-Host '=== DscWorkshop/Datum Integration Example ===' -ForegroundColor Cyan
+Write-Host 'This example shows the YAML configuration structure used in enterprise deployments' -ForegroundColor Green
 
 #region 1. Datum Configuration (source/Datum.yml)
 
@@ -77,7 +77,7 @@ Write-Host $DatumYamlContent -ForegroundColor Gray
 #region 2. Node Configuration (AllNodes layer - Highest Precedence)
 
 Write-Host "`n=== 2. Node Configuration (Highest Precedence) ===" -ForegroundColor Yellow
-Write-Host "File: source/AllNodes/ProdCore/AADConnect01.contoso.com.yml" -ForegroundColor White
+Write-Host 'File: source/AllNodes/ProdCore/AADConnect01.contoso.com.yml' -ForegroundColor White
 
 $NodeConfigYaml = @"
 # source/AllNodes/ProdCore/AADConnect01.contoso.com.yml
@@ -143,7 +143,7 @@ Write-Host $NodeConfigYaml -ForegroundColor Gray
 #region 3. Environment Configuration (Environment layer)
 
 Write-Host "`n=== 3. Environment Configuration ===" -ForegroundColor Yellow
-Write-Host "File: source/Environments/ProdCore.yml" -ForegroundColor White
+Write-Host 'File: source/Environments/ProdCore.yml' -ForegroundColor White
 
 $EnvironmentConfigYaml = @"
 # source/Environments/ProdCore.yml
@@ -205,7 +205,7 @@ Write-Host $EnvironmentConfigYaml -ForegroundColor Gray
 #region 4. Connector Configuration (Dynamic Processing)
 
 Write-Host "`n=== 4. Connector Configuration (Dynamic Processing) ===" -ForegroundColor Yellow
-Write-Host "File: source/Connectors/contoso.com.yml" -ForegroundColor White
+Write-Host 'File: source/Connectors/contoso.com.yml' -ForegroundColor White
 
 $ConnectorConfigYaml = @"
 # source/Connectors/contoso.com.yml
@@ -275,9 +275,9 @@ Write-Host $ConnectorScriptContent -ForegroundColor Gray
 #region 5. Rule Mapping Configuration
 
 Write-Host "`n=== 5. Rule Mapping Configuration ===" -ForegroundColor Yellow
-Write-Host "File: source/RuleMapping/contoso.com.yml" -ForegroundColor White
+Write-Host 'File: source/RuleMapping/contoso.com.yml' -ForegroundColor White
 
-$RuleMappingYaml = @"
+$RuleMappingYaml = @'
 # source/RuleMapping/contoso.com.yml
 # Defines which sync rules apply to this connector
 
@@ -286,7 +286,7 @@ $RuleMappingYaml = @"
 - In from AD - User Common
 - Custom - Inbound - User - Employee
 - Custom - Inbound - User - Manager
-"@
+'@
 
 Write-Host $RuleMappingYaml -ForegroundColor Gray
 
@@ -295,9 +295,9 @@ Write-Host $RuleMappingYaml -ForegroundColor Gray
 #region 6. Individual Sync Rule Definition
 
 Write-Host "`n=== 6. Individual Sync Rule Definition ===" -ForegroundColor Yellow
-Write-Host "File: source/SyncRules/Custom - Inbound - User - Employee.yml" -ForegroundColor White
+Write-Host 'File: source/SyncRules/Custom - Inbound - User - Employee.yml' -ForegroundColor White
 
-$SyncRuleYaml = @"
+$SyncRuleYaml = @'
 # source/SyncRules/Custom - Inbound - User - Employee.yml
 # Individual sync rule definition
 
@@ -345,7 +345,7 @@ AttributeFlowMappings:
     Expression: null
     ValueMergeType: Update
 IsStandardRule: false
-"@
+'@
 
 Write-Host $SyncRuleYaml -ForegroundColor Gray
 
@@ -354,7 +354,7 @@ Write-Host $SyncRuleYaml -ForegroundColor Gray
 #region 7. Baseline Configuration (Lowest Precedence)
 
 Write-Host "`n=== 7. Baseline Configuration (Lowest Precedence) ===" -ForegroundColor Yellow
-Write-Host "File: source/Baselines/DscLcm.yml" -ForegroundColor White
+Write-Host 'File: source/Baselines/DscLcm.yml' -ForegroundColor White
 
 $BaselineConfigYaml = @"
 # source/Baselines/DscLcm.yml
@@ -407,7 +407,7 @@ Write-Host $BaselineConfigYaml -ForegroundColor Gray
 #region 8. DSC Configuration Using DscConfig.AADConnect
 
 Write-Host "`n=== 8. DSC Configuration Implementation ===" -ForegroundColor Yellow
-Write-Host "How DscConfig.AADConnect consumes the merged YAML data" -ForegroundColor White
+Write-Host 'How DscConfig.AADConnect consumes the merged YAML data' -ForegroundColor White
 
 $DscConfigurationExample = @"
 # DSC Configuration using DscConfig.AADConnect composite resources
@@ -455,7 +455,7 @@ Write-Host $DscConfigurationExample -ForegroundColor Gray
 
 Write-Host "`n=== 9. Datum Data Merging Process ===" -ForegroundColor Yellow
 
-Write-Host @"
+Write-Host @'
 Datum Resolution Precedence (Most Specific to Most Generic):
 
 1. AllNodes\ProdCore\AADConnect01.contoso.com.yml    (Node Override)
@@ -478,7 +478,7 @@ Merge Strategies:
 - AADSyncRules\Items: DeepTuple merge by (Name, ConnectorName)
 - AADConnectDirectoryExtensionAttributes\Items: DeepTuple merge by (Name, AssignedObjectClass)
 - Higher precedence layers override lower precedence layers
-"@ -ForegroundColor Cyan
+'@ -ForegroundColor Cyan
 
 #endregion
 
@@ -486,7 +486,7 @@ Merge Strategies:
 
 Write-Host "`n=== 10. Integration Benefits ===" -ForegroundColor Yellow
 
-Write-Host @"
+Write-Host @'
 ✓ Hierarchical Configuration Management
   - Environment-specific overrides (Dev/Test/Prod)
   - Node-specific customizations
@@ -512,11 +512,11 @@ Write-Host @"
   - Automatic execution name generation
   - Seamless consumption of merged YAML data
   - Standard DSC patterns with enterprise configuration management
-"@ -ForegroundColor Green
+'@ -ForegroundColor Green
 
 #endregion
 
-Write-Host @"
+Write-Host @'
 
 === DscWorkshop/Datum Integration Complete! ===
 
@@ -539,4 +539,4 @@ This structure enables enterprise-scale configuration management with:
 - Infrastructure as Code best practices
 - Seamless integration with DSC composite resources
 
-"@ -ForegroundColor Cyan
+'@ -ForegroundColor Cyan

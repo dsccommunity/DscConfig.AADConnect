@@ -15,38 +15,39 @@ This example shows:
 #>
 
 # Function to simulate loading YAML data (in real scenarios, use powershell-yaml module)
-function Get-SimulatedYamlData {
+function Get-SimulatedYamlData
+{
     param($FilePath)
 
     # This simulates what would be loaded from a YAML file
     # In practice, you would use: ConvertFrom-Yaml (Get-Content $FilePath -Raw)
     return @{
-        environments = @{
+        environments        = @{
             production = @{
-                connectors = @('contoso.com', 'hr.contoso.com')
+                connectors             = @('contoso.com', 'hr.contoso.com')
                 syncRulePrecedenceBase = 10
                 enableAdvancedFeatures = $true
             }
-            test = @{
-                connectors = @('test.contoso.com', 'hr-test.contoso.com')
+            test       = @{
+                connectors             = @('test.contoso.com', 'hr-test.contoso.com')
                 syncRulePrecedenceBase = 1000
                 enableAdvancedFeatures = $false
             }
         }
 
-        syncRules = @(
+        syncRules           = @(
             @{
-                name = 'HR-User-Standard'
-                template = 'inbound-user-provision'
-                connectorIndex = 0
-                precedenceOffset = 0
-                targetObjectType = 'person'
-                sourceObjectType = 'user'
-                scopeFilters = @(
+                name              = 'HR-User-Standard'
+                template          = 'inbound-user-provision'
+                connectorIndex    = 0
+                precedenceOffset  = 0
+                targetObjectType  = 'person'
+                sourceObjectType  = 'user'
+                scopeFilters      = @(
                     @{
                         attribute = 'employeeType'
-                        operator = 'EQUAL'
-                        value = 'Employee'
+                        operator  = 'EQUAL'
+                        value     = 'Employee'
                     }
                 )
                 attributeMappings = @(
@@ -56,17 +57,17 @@ function Get-SimulatedYamlData {
                 )
             },
             @{
-                name = 'Finance-User-Special'
-                template = 'inbound-user-provision'
-                connectorIndex = 1
-                precedenceOffset = 5
-                targetObjectType = 'person'
-                sourceObjectType = 'user'
-                scopeFilters = @(
+                name              = 'Finance-User-Special'
+                template          = 'inbound-user-provision'
+                connectorIndex    = 1
+                precedenceOffset  = 5
+                targetObjectType  = 'person'
+                sourceObjectType  = 'user'
+                scopeFilters      = @(
                     @{
                         attribute = 'department'
-                        operator = 'EQUAL'
-                        value = 'Finance'
+                        operator  = 'EQUAL'
+                        value     = 'Finance'
                     }
                 )
                 attributeMappings = @(
@@ -78,72 +79,73 @@ function Get-SimulatedYamlData {
 
         directoryExtensions = @(
             @{
-                name = 'employeeId'
+                name        = 'employeeId'
                 objectClass = 'user'
-                dataType = 'String'
-                required = $true
+                dataType    = 'String'
+                required    = $true
             },
             @{
-                name = 'costCenter'
+                name        = 'costCenter'
                 objectClass = 'user'
-                dataType = 'String'
-                required = $false
+                dataType    = 'String'
+                required    = $false
             },
             @{
-                name = 'budgetCode'
+                name        = 'budgetCode'
                 objectClass = 'user'
-                dataType = 'String'
-                required = $false
+                dataType    = 'String'
+                required    = $false
             },
             @{
-                name = 'projectCode'
+                name        = 'projectCode'
                 objectClass = 'user'
-                dataType = 'String'
-                required = $false
+                dataType    = 'String'
+                required    = $false
             }
         )
     }
 }
 
 # Function to simulate loading JSON data
-function Get-SimulatedJsonData {
+function Get-SimulatedJsonData
+{
     param($FilePath)
 
     # This simulates what would be loaded from a JSON file
     # In practice, you would use: Get-Content $FilePath | ConvertFrom-Json
     return @{
-        metadata = @{
-            version = '2.1.0'
+        metadata             = @{
+            version     = '2.1.0'
             lastUpdated = '2025-01-15'
-            maintainer = 'Identity Team'
+            maintainer  = 'Identity Team'
         }
 
-        additionalSyncRules = @(
+        additionalSyncRules  = @(
             @{
-                name = 'External-Contractors'
-                connectorName = 'vendors.contoso.com'
-                direction = 'Inbound'
-                targetObjectType = 'person'
-                sourceObjectType = 'user'
-                linkType = 'Provision'
-                precedence = 50
-                disabled = $false
-                scopeFilter = @(
+                name                  = 'External-Contractors'
+                connectorName         = 'vendors.contoso.com'
+                direction             = 'Inbound'
+                targetObjectType      = 'person'
+                sourceObjectType      = 'user'
+                linkType              = 'Provision'
+                precedence            = 50
+                disabled              = $false
+                scopeFilter           = @(
                     @{
                         scopeConditionList = @(
                             @{
-                                attribute = 'extensionAttribute15'
+                                attribute          = 'extensionAttribute15'
                                 comparisonOperator = 'EQUAL'
-                                comparisonValue = 'EXTERNAL'
+                                comparisonValue    = 'EXTERNAL'
                             }
                         )
                     }
                 )
                 attributeFlowMappings = @(
                     @{
-                        source = 'extensionAttribute10'
+                        source      = 'extensionAttribute10'
                         destination = 'contractorId'
-                        flowType = 'Direct'
+                        flowType    = 'Direct'
                     }
                 )
             }
@@ -151,23 +153,24 @@ function Get-SimulatedJsonData {
 
         additionalExtensions = @(
             @{
-                name = 'contractorId'
+                name                = 'contractorId'
                 assignedObjectClass = 'user'
-                type = 'String'
-                isEnabled = $true
+                type                = 'String'
+                isEnabled           = $true
             },
             @{
-                name = 'externalSystem'
+                name                = 'externalSystem'
                 assignedObjectClass = 'user'
-                type = 'String'
-                isEnabled = $true
+                type                = 'String'
+                isEnabled           = $true
             }
         )
     }
 }
 
 # Function to transform YAML/JSON data into DSC configuration format
-function Convert-ExternalDataToDscConfig {
+function Convert-ExternalDataToDscConfig
+{
     param(
         [hashtable]$YamlData,
         [hashtable]$JsonData,
@@ -181,40 +184,45 @@ function Convert-ExternalDataToDscConfig {
     # Transform sync rules from template format to DSC format
     $syncRules = @()
 
-    foreach ($rule in $YamlData.syncRules) {
+    foreach ($rule in $YamlData.syncRules)
+    {
         $dscRule = @{
-            Name = "$Environment - $($rule.name)"
-            ConnectorName = $connectors[$rule.connectorIndex]
-            Direction = 'Inbound'
-            TargetObjectType = $rule.targetObjectType
-            SourceObjectType = $rule.sourceObjectType
-            LinkType = 'Provision'
-            Precedence = $precedenceBase + $rule.precedenceOffset
-            Disabled = $false
-            ScopeFilter = @()
+            Name                  = "$Environment - $($rule.name)"
+            ConnectorName         = $connectors[$rule.connectorIndex]
+            Direction             = 'Inbound'
+            TargetObjectType      = $rule.targetObjectType
+            SourceObjectType      = $rule.sourceObjectType
+            LinkType              = 'Provision'
+            Precedence            = $precedenceBase + $rule.precedenceOffset
+            Disabled              = $false
+            ScopeFilter           = @()
             AttributeFlowMappings = @()
         }
 
         # Transform scope filters
-        if ($rule.scopeFilters) {
+        if ($rule.scopeFilters)
+        {
             $scopeConditions = @()
-            foreach ($filter in $rule.scopeFilters) {
+            foreach ($filter in $rule.scopeFilters)
+            {
                 $scopeConditions += @{
-                    Attribute = $filter.attribute
+                    Attribute          = $filter.attribute
                     ComparisonOperator = $filter.operator
-                    ComparisonValue = $filter.value
+                    ComparisonValue    = $filter.value
                 }
             }
             $dscRule.ScopeFilter = @(@{ ScopeConditionList = $scopeConditions })
         }
 
         # Transform attribute mappings
-        if ($rule.attributeMappings) {
-            foreach ($mapping in $rule.attributeMappings) {
+        if ($rule.attributeMappings)
+        {
+            foreach ($mapping in $rule.attributeMappings)
+            {
                 $dscRule.AttributeFlowMappings += @{
-                    Source = $mapping.source
+                    Source      = $mapping.source
                     Destination = $mapping.destination
-                    FlowType = $mapping.flowType
+                    FlowType    = $mapping.flowType
                 }
             }
         }
@@ -227,12 +235,13 @@ function Convert-ExternalDataToDscConfig {
 
     # Transform directory extensions
     $extensions = @()
-    foreach ($ext in $YamlData.directoryExtensions) {
+    foreach ($ext in $YamlData.directoryExtensions)
+    {
         $extensions += @{
-            Name = $ext.name
+            Name                = $ext.name
             AssignedObjectClass = $ext.objectClass
-            Type = $ext.dataType
-            IsEnabled = $true
+            Type                = $ext.dataType
+            IsEnabled           = $true
         }
     }
 
@@ -240,55 +249,64 @@ function Convert-ExternalDataToDscConfig {
     $extensions += $JsonData.additionalExtensions
 
     return @{
-        SyncRules = $syncRules
+        SyncRules           = $syncRules
         DirectoryExtensions = $extensions
-        Metadata = $JsonData.metadata
+        Metadata            = $JsonData.metadata
     }
 }
 
 # Load external data sources
-Write-Host "Loading configuration from external data sources..." -ForegroundColor Green
+Write-Host 'Loading configuration from external data sources...' -ForegroundColor Green
 
 # In real scenarios, these would be actual file paths:
 # $yamlData = Get-Content "C:\Config\AADConnect\sync-config.yaml" -Raw | ConvertFrom-Yaml
 # $jsonData = Get-Content "C:\Config\AADConnect\additional-config.json" -Raw | ConvertFrom-Json
 
-$yamlData = Get-SimulatedYamlData -FilePath "sync-config.yaml"
-$jsonData = Get-SimulatedJsonData -FilePath "additional-config.json"
+$yamlData = Get-SimulatedYamlData -FilePath 'sync-config.yaml'
+$jsonData = Get-SimulatedJsonData -FilePath 'additional-config.json'
 
 # Validate external data before processing
-function Test-ConfigurationData {
+function Test-ConfigurationData
+{
     param([hashtable]$Data)
 
-    Write-Host "Validating configuration data..." -ForegroundColor Yellow
+    Write-Host 'Validating configuration data...' -ForegroundColor Yellow
 
     $valid = $true
 
     # Validate sync rules
-    foreach ($rule in $Data.SyncRules) {
-        if (-not $rule.Name -or -not $rule.ConnectorName) {
-            Write-Warning "Invalid sync rule found: Missing Name or ConnectorName"
+    foreach ($rule in $Data.SyncRules)
+    {
+        if (-not $rule.Name -or -not $rule.ConnectorName)
+        {
+            Write-Warning 'Invalid sync rule found: Missing Name or ConnectorName'
             $valid = $false
         }
-        if ($rule.Precedence -lt 1 -or $rule.Precedence -gt 99999) {
+        if ($rule.Precedence -lt 1 -or $rule.Precedence -gt 99999)
+        {
             Write-Warning "Invalid precedence value: $($rule.Precedence)"
             $valid = $false
         }
     }
 
     # Validate directory extensions
-    foreach ($ext in $Data.DirectoryExtensions) {
-        if (-not $ext.Name -or -not $ext.AssignedObjectClass) {
-            Write-Warning "Invalid directory extension: Missing Name or AssignedObjectClass"
+    foreach ($ext in $Data.DirectoryExtensions)
+    {
+        if (-not $ext.Name -or -not $ext.AssignedObjectClass)
+        {
+            Write-Warning 'Invalid directory extension: Missing Name or AssignedObjectClass'
             $valid = $false
         }
     }
 
-    if ($valid) {
-        Write-Host "✓ Configuration data validation passed" -ForegroundColor Green
-    } else {
-        Write-Error "Configuration data validation failed"
-        throw "Invalid configuration data"
+    if ($valid)
+    {
+        Write-Host '✓ Configuration data validation passed' -ForegroundColor Green
+    }
+    else
+    {
+        Write-Error 'Configuration data validation failed'
+        throw 'Invalid configuration data'
     }
 
     return $valid
@@ -297,7 +315,8 @@ function Test-ConfigurationData {
 # Process data for different environments
 $environments = @('production', 'test')
 
-foreach ($env in $environments) {
+foreach ($env in $environments)
+{
     Write-Host "`nProcessing configuration for environment: $env" -ForegroundColor Cyan
 
     # Transform external data to DSC format
@@ -308,15 +327,15 @@ foreach ($env in $environments) {
 
     # Create configuration data for DSC
     $ConfigurationData = @{
-        AllNodes = @(
+        AllNodes                               = @(
             @{
-                NodeName = 'localhost'
-                Environment = $env
+                NodeName      = 'localhost'
+                Environment   = $env
                 ConfigVersion = $dscConfig.Metadata.version
-                LastUpdated = $dscConfig.Metadata.lastUpdated
+                LastUpdated   = $dscConfig.Metadata.lastUpdated
             }
         )
-        AADSyncRules = @{
+        AADSyncRules                           = @{
             Items = $dscConfig.SyncRules
         }
         AADConnectDirectoryExtensionAttributes = @{
@@ -325,11 +344,11 @@ foreach ($env in $environments) {
     }
 
     # DSC Configuration
-    Configuration Example_DscConfig_DataDriven
+    configuration Example_DscConfig_DataDriven
     {
         Import-DscResource -ModuleName DscConfig.AADConnect
 
-        Node $AllNodes.NodeName
+        node $AllNodes.NodeName
         {
             # Apply sync rules from external data sources
             AADSyncRules "DataDrivenSyncRules_$($Node.Environment)"
@@ -361,30 +380,32 @@ Environment: $env
 }
 
 # Example GitOps integration function
-function Invoke-GitOpsConfigurationUpdate {
+function Invoke-GitOpsConfigurationUpdate
+{
     param(
-        [string]$GitRepoPath = "C:\GitOps\AADConnect-Config",
-        [string]$Environment = "production"
+        [string]$GitRepoPath = 'C:\GitOps\AADConnect-Config',
+        [string]$Environment = 'production'
     )
 
     Write-Host "`nGitOps Configuration Update Example" -ForegroundColor Magenta
-    Write-Host "This demonstrates how to integrate with GitOps workflows:" -ForegroundColor White
+    Write-Host 'This demonstrates how to integrate with GitOps workflows:' -ForegroundColor White
 
     $steps = @(
-        "1. Pull latest configuration from Git repository",
-        "2. Validate YAML/JSON configuration files",
-        "3. Transform external data to DSC configuration format",
-        "4. Compile and test DSC configuration",
-        "5. Deploy to target environment",
-        "6. Update deployment status in Git repository"
+        '1. Pull latest configuration from Git repository',
+        '2. Validate YAML/JSON configuration files',
+        '3. Transform external data to DSC configuration format',
+        '4. Compile and test DSC configuration',
+        '5. Deploy to target environment',
+        '6. Update deployment status in Git repository'
     )
 
-    foreach ($step in $steps) {
+    foreach ($step in $steps)
+    {
         Write-Host "   $step" -ForegroundColor Gray
     }
 
     Write-Host "`nExample commands for GitOps integration:" -ForegroundColor Yellow
-    Write-Host "   git pull origin main" -ForegroundColor Gray
+    Write-Host '   git pull origin main' -ForegroundColor Gray
     Write-Host "   .\Invoke-ConfigValidation.ps1 -Environment $Environment" -ForegroundColor Gray
     Write-Host "   .\Deploy-AADConnectConfig.ps1 -Environment $Environment" -ForegroundColor Gray
     Write-Host "   git tag 'deploy-$Environment-$(Get-Date -Format 'yyyyMMdd-HHmmss')'" -ForegroundColor Gray
@@ -393,7 +414,7 @@ function Invoke-GitOpsConfigurationUpdate {
 # Demonstrate GitOps integration
 Invoke-GitOpsConfigurationUpdate
 
-Write-Host @"
+Write-Host @'
 
 Data-Driven Configuration Complete!
 
@@ -416,4 +437,4 @@ External Data Sources Used:
 - JSON: Additional rules and metadata
 - Environment-specific overlays for precedence and connectors
 
-"@ -ForegroundColor Cyan
+'@ -ForegroundColor Cyan

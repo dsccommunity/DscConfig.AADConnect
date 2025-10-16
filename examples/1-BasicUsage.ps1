@@ -5,30 +5,30 @@ This example demonstrates basic usage of both DscConfig.AADConnect composite
 resources with simple configuration data arrays.
 #>
 
-Configuration Example_DscConfig_BasicUsage
+configuration Example_DscConfig_BasicUsage
 {
     Import-DscResource -ModuleName DscConfig.AADConnect
 
-    Node localhost
+    node localhost
     {
         # Define a simple array of sync rules
         $syncRules = @(
             @{
-                Name                = 'Basic - Inbound - User - Employee'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 10
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Basic - Inbound - User - Employee'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 10
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'employeeType'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'Employee'
+                                Attribute          = 'employeeType'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'Employee'
                             }
                         )
                     }
@@ -52,21 +52,21 @@ Configuration Example_DscConfig_BasicUsage
                 )
             },
             @{
-                Name                = 'Basic - Inbound - User - Manager'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 15
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Basic - Inbound - User - Manager'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 15
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'manager'
-                                ComparisonOperator  = 'ISNOTNULL'
-                                ComparisonValue     = ''
+                                Attribute          = 'manager'
+                                ComparisonOperator = 'ISNOTNULL'
+                                ComparisonValue    = ''
                             }
                         )
                     }
@@ -118,4 +118,4 @@ Configuration Example_DscConfig_BasicUsage
 }
 
 # Compile the configuration
-Example_DscConfig_BasicUsage -OutputPath "C:\DSC\BasicUsage"
+Example_DscConfig_BasicUsage -OutputPath 'C:\DSC\BasicUsage'
