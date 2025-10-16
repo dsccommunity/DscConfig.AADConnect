@@ -171,7 +171,14 @@ AADConnectDirectoryExtensionAttributes:
 
 ## Resource Documentation
 
-### AADSyncRules
+For detailed documentation on each composite resource, see:
+
+- **[AADSyncRules](docs/AADSyncRules.md)**: Processes arrays of Azure AD Connect sync rule configurations
+- **[AADConnectDirectoryExtensionAttributes](docs/AADConnectDirectoryExtensionAttributes.md)**: Processes arrays of directory extension attribute configurations
+
+### Quick Reference
+
+#### AADSyncRules
 
 **Parameters:**
 
@@ -183,7 +190,7 @@ AADConnectDirectoryExtensionAttributes:
 **Execution Name Generation:**
 Execution names are generated using the pattern: `{ConnectorName}__{RuleName}` with special characters replaced by underscores.
 
-### AADConnectDirectoryExtensionAttributes
+#### AADConnectDirectoryExtensionAttributes
 
 **Parameters:**
 
