@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Removed files of `DscBuildHelpers` and cleaned up `.gitignore`.
 - Updated `RequiredModules.psd1`.
+- Updated documentation.
 
 ## [0.1.1] - 2024-07-30
 
