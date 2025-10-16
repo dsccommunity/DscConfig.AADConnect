@@ -4,24 +4,24 @@
 
 ### Configuration Management Gap
 
-Modern enterprise configuration management systems like DscWorkshop and Datum 
-provide sophisticated hierarchical data management capabilities. However, there 
-is often a translation layer needed between configuration data structures and 
-individual DSC resources. DscConfig.AADConnect fills this specific gap for 
+Modern enterprise configuration management systems like DscWorkshop and Datum
+provide sophisticated hierarchical data management capabilities. However, there
+is often a translation layer needed between configuration data structures and
+individual DSC resources. DscConfig.AADConnect fills this specific gap for
 Azure AD Connect configurations.
 
 ### Complexity Abstraction Need
 
-AADConnectDsc provides powerful, low-level DSC resources for managing Azure AD 
-Connect components. However, these resources require individual instantiation 
-for each sync rule or directory extension. In enterprise environments managing 
+AADConnectDsc provides powerful, low-level DSC resources for managing Azure AD
+Connect components. However, these resources require individual instantiation
+for each sync rule or directory extension. In enterprise environments managing
 dozens or hundreds of sync rules, this becomes unwieldy without abstraction.
 
 ### Data-Driven Configuration Requirements
 
-Organizations using Infrastructure as Code approaches need to define their 
-Azure AD Connect configurations in data (YAML, JSON) rather than imperative 
-PowerShell code. DscConfig.AADConnect enables this by accepting configuration 
+Organizations using Infrastructure as Code approaches need to define their
+Azure AD Connect configurations in data (YAML, JSON) rather than imperative
+PowerShell code. DscConfig.AADConnect enables this by accepting configuration
 data arrays and translating them into appropriate DSC resource calls.
 
 ## Problems It Solves
@@ -31,12 +31,14 @@ data arrays and translating them into appropriate DSC resource calls.
 **Configuration Scale Management**
 
 Enterprise Azure AD Connect deployments often require:
+
 - Managing multiple environments with similar but variant configurations
 - Processing dozens of sync rules from data sources
 - Maintaining consistency across multiple Azure AD Connect instances
 - Bulk updates and rollbacks of synchronization configurations
 
 DscConfig.AADConnect solves this by:
+
 - Accepting arrays of configuration items instead of individual resource calls
 - Generating unique execution names automatically to prevent conflicts
 - Providing consistent patterns for processing bulk configurations
@@ -45,12 +47,14 @@ DscConfig.AADConnect solves this by:
 **Configuration Data Translation**
 
 Traditional DSC configurations require explicit resource blocks for each item:
+
 - Manual instantiation of each sync rule resource
 - Complex PowerShell logic to generate execution names
 - Repetitive code patterns for similar configuration items
 - Difficulty maintaining consistency across many similar resources
 
 DscConfig.AADConnect addresses this through:
+
 - Automatic iteration through configuration data arrays
 - Standardized execution name generation from configuration properties
 - Simplified composite resource interfaces
@@ -60,14 +64,16 @@ DscConfig.AADConnect addresses this through:
 
 **Resource Instantiation Complexity**
 
-AADConnectDsc resources require specific parameter combinations and careful 
+AADConnectDsc resources require specific parameter combinations and careful
 execution name management. Manual instantiation leads to:
+
 - Execution name collisions when managing multiple resources
 - Inconsistent parameter validation and default handling
 - Complex PowerShell code for bulk resource creation
 - Maintenance overhead for configuration changes
 
 DscConfig.AADConnect simplifies this by:
+
 - Automatic execution name generation using safe character replacement
 - Consistent default value application (e.g., Ensure = 'Present')
 - Validation of required properties before resource creation
@@ -76,12 +82,14 @@ DscConfig.AADConnect simplifies this by:
 **Configuration Management Integration**
 
 Enterprise configuration management systems need predictable interfaces:
+
 - Consistent data structure requirements
 - Reliable resource instantiation patterns
 - Integration with hierarchical configuration data
 - Support for environment-specific overrides
 
 DscConfig.AADConnect provides:
+
 - Standardized hashtable array interfaces for configuration data
 - Integration with Datum and DscWorkshop patterns
 - Support for configuration data merging and inheritance
@@ -104,6 +112,7 @@ DscConfig.AADConnect should enable configuration systems to:
 **For Infrastructure Engineers**
 
 The module should provide:
+
 - Simple, predictable interfaces for common Azure AD Connect configuration tasks
 - Clear patterns for defining sync rules and directory extensions in data
 - Minimal learning curve for users familiar with DSC and configuration management
@@ -112,6 +121,7 @@ The module should provide:
 **For Enterprise Operations**
 
 Day-to-day operations should include:
+
 - Bulk configuration updates through data file changes
 - Consistent configuration patterns across environments
 - Clear audit trails for configuration changes
@@ -154,23 +164,26 @@ DscConfig.AADConnect follows configuration management best practices:
 ### Quality Expectations
 
 **Reliability**
+
 - Consistent resource instantiation without name collisions
 - Proper error handling and meaningful error messages
 - Graceful handling of invalid or incomplete configuration data
 - Predictable behavior across different execution environments
 
 **Maintainability**
+
 - Clear, documented interfaces for configuration data structures
 - Minimal code duplication through standardized patterns
 - Easy to extend for new resource types or configuration scenarios
 - Consistent with DSC community practices and conventions
 
 **Integration**
+
 - Seamless operation with AADConnectDsc underlying resources
 - Compatibility with DscWorkshop and Datum frameworks
 - Support for enterprise configuration management patterns
 - Clear documentation for integration scenarios
 
-This product vision ensures DscConfig.AADConnect provides real value as a 
-translation layer between enterprise configuration management systems and 
+This product vision ensures DscConfig.AADConnect provides real value as a
+translation layer between enterprise configuration management systems and
 Azure AD Connect DSC resources.

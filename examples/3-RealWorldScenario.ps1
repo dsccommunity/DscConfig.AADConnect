@@ -16,44 +16,44 @@ This scenario covers:
 
 # Real-world configuration data representing enterprise AAD Connect setup
 $RealWorldConfigurationData = @{
-    AllNodes = @(
+    AllNodes                               = @(
         @{
-            NodeName = 'localhost'
-            Environment = 'Production'
+            NodeName     = 'localhost'
+            Environment  = 'Production'
             Organization = 'Contoso Corporation'
         }
     )
 
     # Complex sync rules for enterprise scenarios
-    AADSyncRules = @{
+    AADSyncRules                           = @{
         Items = @(
             # Primary user provisioning from on-premises AD
             @{
-                Name                = 'Enterprise - Inbound - User - Standard Employee'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 10
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Enterprise - Inbound - User - Standard Employee'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 10
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'employeeType'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'Employee'
+                                Attribute          = 'employeeType'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'Employee'
                             },
                             @{
-                                Attribute           = 'userAccountControl'
-                                ComparisonOperator  = 'NOTEQUAL'
-                                ComparisonValue     = '514'
+                                Attribute          = 'userAccountControl'
+                                ComparisonOperator = 'NOTEQUAL'
+                                ComparisonValue    = '514'
                             },
                             @{
-                                Attribute           = 'extensionAttribute15'
-                                ComparisonOperator  = 'NOTEQUAL'
-                                ComparisonValue     = 'EXCLUDE_FROM_SYNC'
+                                Attribute          = 'extensionAttribute15'
+                                ComparisonOperator = 'NOTEQUAL'
+                                ComparisonValue    = 'EXCLUDE_FROM_SYNC'
                             }
                         )
                     }
@@ -94,26 +94,26 @@ $RealWorldConfigurationData = @{
 
             # Contractor/vendor user provisioning
             @{
-                Name                = 'Enterprise - Inbound - User - Contractor'
-                ConnectorName       = 'contractors.contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 15
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Enterprise - Inbound - User - Contractor'
+                ConnectorName         = 'contractors.contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 15
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'employeeType'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'Contractor'
+                                Attribute          = 'employeeType'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'Contractor'
                             },
                             @{
-                                Attribute           = 'extensionAttribute10'
-                                ComparisonOperator  = 'ISNOTNULL'
-                                ComparisonValue     = ''
+                                Attribute          = 'extensionAttribute10'
+                                ComparisonOperator = 'ISNOTNULL'
+                                ComparisonValue    = ''
                             }
                         )
                     }
@@ -144,21 +144,21 @@ $RealWorldConfigurationData = @{
 
             # Manager relationship sync rule
             @{
-                Name                = 'Enterprise - Inbound - User - Manager Hierarchy'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 20
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Enterprise - Inbound - User - Manager Hierarchy'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 20
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'manager'
-                                ComparisonOperator  = 'ISNOTNULL'
-                                ComparisonValue     = ''
+                                Attribute          = 'manager'
+                                ComparisonOperator = 'ISNOTNULL'
+                                ComparisonValue    = ''
                             }
                         )
                     }
@@ -174,26 +174,26 @@ $RealWorldConfigurationData = @{
 
             # Security group provisioning
             @{
-                Name                = 'Enterprise - Inbound - Group - Security Groups'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'group'
-                SourceObjectType    = 'group'
-                LinkType            = 'Provision'
-                Precedence          = 30
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Enterprise - Inbound - Group - Security Groups'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'group'
+                SourceObjectType      = 'group'
+                LinkType              = 'Provision'
+                Precedence            = 30
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'groupType'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = '2147483650'
+                                Attribute          = 'groupType'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = '2147483650'
                             },
                             @{
-                                Attribute           = 'extensionAttribute5'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'SYNC_TO_AAD'
+                                Attribute          = 'extensionAttribute5'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'SYNC_TO_AAD'
                             }
                         )
                     }
@@ -219,21 +219,21 @@ $RealWorldConfigurationData = @{
 
             # Exchange hybrid mail attributes
             @{
-                Name                = 'Enterprise - Inbound - User - Exchange Attributes'
-                ConnectorName       = 'contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 25
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Enterprise - Inbound - User - Exchange Attributes'
+                ConnectorName         = 'contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 25
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'mailNickname'
-                                ComparisonOperator  = 'ISNOTNULL'
-                                ComparisonValue     = ''
+                                Attribute          = 'mailNickname'
+                                ComparisonOperator = 'ISNOTNULL'
+                                ComparisonValue    = ''
                             }
                         )
                     }
@@ -388,11 +388,11 @@ $RealWorldConfigurationData = @{
     }
 }
 
-Configuration Example_DscConfig_RealWorldScenario
+configuration Example_DscConfig_RealWorldScenario
 {
     Import-DscResource -ModuleName DscConfig.AADConnect
 
-    Node $AllNodes.NodeName
+    node $AllNodes.NodeName
     {
         # Deploy comprehensive sync rules for enterprise scenario
         AADSyncRules 'EnterpriseSync'
@@ -413,19 +413,20 @@ Configuration Example_DscConfig_RealWorldScenario
 # with environment-specific data
 
 # Production deployment
-Write-Host "Compiling Real-World Scenario for Production..." -ForegroundColor Green
-Example_DscConfig_RealWorldScenario -ConfigurationData $RealWorldConfigurationData -OutputPath "C:\DSC\RealWorld\Production"
+Write-Host 'Compiling Real-World Scenario for Production...' -ForegroundColor Green
+Example_DscConfig_RealWorldScenario -ConfigurationData $RealWorldConfigurationData -OutputPath 'C:\DSC\RealWorld\Production'
 
 # Test environment with modified precedence values
 $TestConfigData = $RealWorldConfigurationData.Clone()
-foreach ($syncRule in $TestConfigData.AADSyncRules.Items) {
+foreach ($syncRule in $TestConfigData.AADSyncRules.Items)
+{
     $syncRule.Precedence += 1000  # Offset precedence for test environment
 }
 
-Write-Host "Compiling Real-World Scenario for Test Environment..." -ForegroundColor Yellow
-Example_DscConfig_RealWorldScenario -ConfigurationData $TestConfigData -OutputPath "C:\DSC\RealWorld\Test"
+Write-Host 'Compiling Real-World Scenario for Test Environment...' -ForegroundColor Yellow
+Example_DscConfig_RealWorldScenario -ConfigurationData $TestConfigData -OutputPath 'C:\DSC\RealWorld\Test'
 
-Write-Host @"
+Write-Host @'
 
 Real-World Scenario Configuration Complete!
 
@@ -443,4 +444,4 @@ Key Features Demonstrated:
 - Multi-environment deployment strategies
 - Integration points for major enterprise systems (SAP, Workday, ServiceNow)
 
-"@ -ForegroundColor Cyan
+'@ -ForegroundColor Cyan

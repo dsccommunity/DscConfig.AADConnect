@@ -8,37 +8,37 @@ data sources processed by systems like Datum.
 
 # Configuration data that would typically come from external sources
 $ConfigurationData = @{
-    AllNodes = @(
+    AllNodes                               = @(
         @{
-            NodeName = 'localhost'
+            NodeName    = 'localhost'
             Environment = 'Production'
         }
     )
 
     # Sync rules configuration data
-    AADSyncRules = @{
+    AADSyncRules                           = @{
         Items = @(
             @{
-                Name                = 'HR - Inbound - User - Employee'
-                ConnectorName       = 'hr.contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 20
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'HR - Inbound - User - Employee'
+                ConnectorName         = 'hr.contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 20
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'employeeType'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'Employee'
+                                Attribute          = 'employeeType'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'Employee'
                             },
                             @{
-                                Attribute           = 'userAccountControl'
-                                ComparisonOperator  = 'NOTEQUAL'
-                                ComparisonValue     = '514'
+                                Attribute          = 'userAccountControl'
+                                ComparisonOperator = 'NOTEQUAL'
+                                ComparisonValue    = '514'
                             }
                         )
                     }
@@ -62,21 +62,21 @@ $ConfigurationData = @{
                 )
             },
             @{
-                Name                = 'Finance - Inbound - User - Financial'
-                ConnectorName       = 'finance.contoso.com'
-                Direction           = 'Inbound'
-                TargetObjectType    = 'person'
-                SourceObjectType    = 'user'
-                LinkType            = 'Provision'
-                Precedence          = 25
-                Disabled            = $false
-                ScopeFilter         = @(
+                Name                  = 'Finance - Inbound - User - Financial'
+                ConnectorName         = 'finance.contoso.com'
+                Direction             = 'Inbound'
+                TargetObjectType      = 'person'
+                SourceObjectType      = 'user'
+                LinkType              = 'Provision'
+                Precedence            = 25
+                Disabled              = $false
+                ScopeFilter           = @(
                     @{
                         ScopeConditionList = @(
                             @{
-                                Attribute           = 'department'
-                                ComparisonOperator  = 'EQUAL'
-                                ComparisonValue     = 'Finance'
+                                Attribute          = 'department'
+                                ComparisonOperator = 'EQUAL'
+                                ComparisonValue    = 'Finance'
                             }
                         )
                     }
@@ -134,11 +134,11 @@ $ConfigurationData = @{
     }
 }
 
-Configuration Example_DscConfig_ConfigurationManagement
+configuration Example_DscConfig_ConfigurationManagement
 {
     Import-DscResource -ModuleName DscConfig.AADConnect
 
-    Node $AllNodes.NodeName
+    node $AllNodes.NodeName
     {
         # Use configuration data from external source (e.g., Datum)
         AADSyncRules 'ConfigMgmtSyncRules'
@@ -154,4 +154,4 @@ Configuration Example_DscConfig_ConfigurationManagement
 }
 
 # Compile the configuration with configuration data
-Example_DscConfig_ConfigurationManagement -ConfigurationData $ConfigurationData -OutputPath "C:\DSC\ConfigManagement"
+Example_DscConfig_ConfigurationManagement -ConfigurationData $ConfigurationData -OutputPath 'C:\DSC\ConfigManagement'
