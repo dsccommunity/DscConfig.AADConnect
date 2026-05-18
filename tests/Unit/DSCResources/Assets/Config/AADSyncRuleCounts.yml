@@ -1,0 +1,7 @@
+Items:
+  - ConnectorName: contoso.com
+    RuleCount: 42
+  - ConnectorName: fabrikam.com
+    RuleCount: 30
+  - ConnectorName: '*'
+    RuleCount: 168

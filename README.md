@@ -37,6 +37,16 @@ Processes arrays of directory extension attribute configurations and generates i
 - Schema validation and type checking
 - Integration with Azure AD schema requirements
 
+### AADSyncRuleCounts
+
+Processes arrays of sync-rule-count expectations and generates individual `AADSyncRuleCount` DSC resource instances. The underlying resource is **report-only**: it never adds or removes rules to reach the expected count, it fails the configuration when the actual count diverges so an operator can investigate.
+
+**Key Features:**
+- Bulk drift detection for sync-rule counts per connector
+- Single-scope or all-connector (`'*'`) checks in the same array
+- Safe execution-name generation for the empty / wildcard connector case
+- Integration with the same `AADConnectDsc` runtime as the other composites
+
 ## Requirements
 
 ### System Requirements
@@ -175,6 +185,7 @@ For detailed documentation on each composite resource, see:
 
 - **[AADSyncRules](docs/AADSyncRules.md)**: Processes arrays of Azure AD Connect sync rule configurations
 - **[AADConnectDirectoryExtensionAttributes](docs/AADConnectDirectoryExtensionAttributes.md)**: Processes arrays of directory extension attribute configurations
+- **[AADSyncRuleCounts](docs/AADSyncRuleCounts.md)**: Processes arrays of sync-rule-count expectations (report-only drift detection)
 
 ### Quick Reference
 
@@ -200,6 +211,18 @@ Execution names are generated using the pattern: `{ConnectorName}__{RuleName}` w
 
 **Execution Name Generation:**
 Execution names are generated using the pattern: `{AttributeName}__{ObjectClass}` with special characters replaced by underscores.
+
+#### AADSyncRuleCounts
+
+**Parameters:**
+
+- **Items** (Mandatory): Array of hashtables representing expected sync-rule counts
+  - Each hashtable must contain `ConnectorName` (key) and `RuleCount` (mandatory `uint32`)
+  - Use an empty string or `'*'` for `ConnectorName` to count rules across all connectors
+  - The underlying `AADSyncRuleCount` resource is report-only; it does not remediate count drift
+
+**Execution Name Generation:**
+Execution names use the pattern `AADSyncRuleCount__{ConnectorName}` with special characters replaced by underscores. The empty / `'*'` connector value is mapped to the literal token `AllConnectors` to keep execution names unique and valid.
 
 ## Examples
 

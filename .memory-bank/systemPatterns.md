@@ -19,21 +19,21 @@ processing.
                           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                    DscConfig.AADConnect                        │
-│  ┌─────────────────┐                  ┌─────────────────────┐  │
-│  │   AADSyncRules  │                  │ AADConnectDirectory │  │
-│  │   Composite     │                  │ ExtensionAttributes │  │
-│  │   Resource      │                  │ Composite Resource  │  │
-│  └─────────────────┘                  └─────────────────────┘  │
+│  ┌────────────────┐ ┌──────────────────────┐ ┌──────────────┐ │
+│  │  AADSyncRules  │ │ AADConnectDirectory  │ │ AADSyncRule  │ │
+│  │  Composite     │ │ ExtensionAttributes  │ │ Counts       │ │
+│  │  Resource      │ │ Composite Resource   │ │ Composite    │ │
+│  └────────────────┘ └──────────────────────┘ └──────────────┘ │
 └─────────────────────────┬───────────────────────────────────────┘
                           │ Individual Resource Instances
                           ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      AADConnectDsc                              │
-│  ┌─────────────────┐                  ┌─────────────────────┐  │
-│  │   AADSyncRule   │                  │ AADConnectDirectory │  │
-│  │   DSC Resource  │                  │ ExtensionAttribute  │  │
-│  │                 │                  │ DSC Resource        │  │
-│  └─────────────────┘                  └─────────────────────┘  │
+│  ┌────────────────┐ ┌──────────────────────┐ ┌──────────────┐ │
+│  │  AADSyncRule   │ │ AADConnectDirectory  │ │ AADSyncRule  │ │
+│  │  DSC Resource  │ │ ExtensionAttribute   │ │ Count        │ │
+│  │                │ │ DSC Resource         │ │ (report-only)│ │
+│  └────────────────┘ └──────────────────────┘ └──────────────┘ │
 └─────────────────────────┬───────────────────────────────────────┘
                           │ ADSync PowerShell Module
                           ▼
@@ -133,6 +133,17 @@ $executionName = ($item.ConnectorName + '__' + $item.Name) -replace '[\s(){}/\\:
 
 ```powershell
 $executionName = ($item.Name + '__' + $item.AssignedObjectClass) -replace '[\s(){}/\\:-]', '_'
+```
+
+**AADSyncRuleCounts Pattern** (empty / `'*'` connector → `AllConnectors`):
+
+```powershell
+$scope = if ([string]::IsNullOrEmpty($item.ConnectorName) -or $item.ConnectorName -eq '*') {
+    'AllConnectors'
+} else {
+    $item.ConnectorName
+}
+$executionName = ("AADSyncRuleCount__$scope") -replace '[\s(){}/\\:-]', '_'
 ```
 
 ### Integration Patterns

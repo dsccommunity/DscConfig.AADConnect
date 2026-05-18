@@ -12,6 +12,12 @@
     VariablesToExport = '*'
     AliasesToExport   = '*'
 
+    DscResourcesToExport = @(
+        'AADSyncRules'
+        'AADConnectDirectoryExtensionAttributes'
+        'AADSyncRuleCounts'
+    )
+
     PrivateData       = @{
 
         PSData = @{
