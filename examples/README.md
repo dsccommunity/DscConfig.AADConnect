@@ -24,6 +24,10 @@ Example showing how to use external YAML/JSON data sources with the composite re
 
 Complete example demonstrating integration with DscWorkshop and Datum frameworks, including hierarchical configuration data, merge strategies, and enterprise patterns.
 
+### [6-AADSyncRuleCounts.ps1](6-AADSyncRuleCounts.ps1)
+
+Demonstrates the report-only `AADSyncRuleCounts` composite resource for bulk drift detection of expected sync-rule counts per connector and across all connectors.
+
 ## Usage
 
 Each example includes:

@@ -20,6 +20,19 @@ _Last updated: 2026-05-18_
 
 ## Recent Log
 
+- 2026-05-18 — Re-enabled the `AADSyncRuleCounts` compile test now that the
+  locally-built `AADConnectDsc 0.6.0` (with `AADSyncRuleCount`) is staged
+  under `output/RequiredModules/AADConnectDsc/0.6.0/`. Full build in a fresh
+  pwsh session passes 8/8 tests. Documented the in-process DSC parser
+  keyword-cache pitfall in `activeContext.md`.
+- 2026-05-18 — Fixed the broken build: added missing `DscResourcesToExport`
+  to the module manifest (root cause: `Get-DscResource -Module` returned 0,
+  so the per-resource compile tests never ran and the Final tests failed),
+  and skipped the `AADSyncRuleCounts` compile test until `AADConnectDsc`
+  publishes `AADSyncRuleCount`. Full default build now exits 0.
+- 2026-05-18 — Added `AADSyncRuleCounts` composite resource on branch
+  `ai/add-aadsyncrulecounts` wrapping the new report-only `AADSyncRuleCount`
+  resource from `AADConnectDsc` (`feature/AadsyncrulecountResource`).
 - 2026-05-18 — Memory Bank refreshed: folder renamed to `.memory-bank/`,
   files trimmed to new agent-spec caps, `promptHistory.md` added.
 - 2025-10 — Documentation pass: README cross-links to `docs/`, examples
