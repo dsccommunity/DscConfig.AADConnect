@@ -5,6 +5,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated module dependencies in `RequiredModules.psd1`.
+- Updated build scripts (`build.ps1`, `Resolve-Dependency.ps1`) to align
+  with the latest version of Sampler.
+
 ## [0.2.0] - 2025-10-16
 
 ### Added
